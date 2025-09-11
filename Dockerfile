@@ -30,4 +30,4 @@ USER spring:spring
 EXPOSE 8081
 
 # Run the application
-CMD ["java", "-jar", "target/RestAPIdemo-0.0.1-SNAPSHOT.jar"]
+CMD ["java", "-jar", "target/course-management-api-1.3.0.jar"]

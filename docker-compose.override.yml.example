@@ -1,0 +1,38 @@
+# Example override file for docker-compose
+# Copy this to docker-compose.override.yml and modify as needed
+
+version: '3.8'
+
+services:
+  app:
+    environment:
+      # Override database settings for local development
+      DB_URL: jdbc:postgresql://postgres:5432/course_management
+      DB_USERNAME: postgres
+      DB_PASSWORD: your_secure_password
+      
+      # Override security settings
+      ADMIN_USERNAME: your_admin_username
+      ADMIN_PASSWORD: your_secure_admin_password
+      JWT_SECRET: your-very-secure-jwt-secret-key
+      
+      # Development settings
+      DDL_AUTO: update
+      SHOW_SQL: true
+      LOG_LEVEL: DEBUG
+    volumes:
+      # Mount local source code for development
+      - ./src:/app/src
+      - ./target:/app/target
+    ports:
+      # Expose debug port for development
+      - "5005:5005"
+    command: >
+      sh -c "mvn spring-boot:run -Dspring-boot.run.jvmArguments='-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=*:5005'"
+
+  postgres:
+    environment:
+      POSTGRES_PASSWORD: your_secure_password
+    volumes:
+      # Persist data in named volume
+      - postgres_data:/var/lib/postgresql/data

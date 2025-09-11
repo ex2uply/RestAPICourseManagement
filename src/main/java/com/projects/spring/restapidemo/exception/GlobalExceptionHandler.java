@@ -31,15 +31,20 @@ public class GlobalExceptionHandler {
             String errorMessage = error.getDefaultMessage();
             errors.put(fieldName, errorMessage);
         });
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                .body(ApiResponse.error("Validation failed", HttpStatus.BAD_REQUEST.value()));
+        ApiResponse<Map<String, String>> response = new ApiResponse<>();
+        response.setSuccess(false);
+        response.setMessage("Validation failed");
+        response.setData(errors);
+        response.setStatusCode(HttpStatus.BAD_REQUEST.value());
+        response.setTimestamp(java.time.LocalDateTime.now());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
     }
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ApiResponse<Object>> handleGlobalException(
             Exception ex, WebRequest request) {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body(ApiResponse.error("An unexpected error occurred: " + ex.getMessage(), 
+                .body(ApiResponse.error("An unexpected error occurred: " + ex.getMessage(),
                         HttpStatus.INTERNAL_SERVER_ERROR.value()));
     }
 }

@@ -80,3 +80,41 @@ logs/
 # Temporary files
 tmp/
 temp/
+
+# Spring Boot specific
+spring-boot-starter-*.jar
+spring-boot-starter-*.war
+
+# Test results
+TEST-*.xml
+test-results/
+
+# Code coverage reports
+jacoco.exec
+target/site/jacoco/
+
+# Static analysis reports
+spotbugsXml.xml
+checkstyle-result.xml
+
+# Docker
+.dockerignore
+
+# Local development
+local.properties
+application-local.properties
+
+# MacOS
+.AppleDouble
+.LSOverride
+
+# Windows
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*

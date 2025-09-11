@@ -197,11 +197,12 @@ The application includes Spring Boot Actuator for monitoring:
 mvn clean package
 ```
 
-2. Create a Dockerfile:
+2. The Dockerfile is already included in the project:
 
 ```dockerfile
 FROM openjdk:21-jdk-slim
-COPY target/RestAPIdemo-0.0.1-SNAPSHOT.jar app.jar
+# ... (see Dockerfile for complete configuration)
+COPY target/course-management-api-1.3.0.jar app.jar
 EXPOSE 8081
 ENTRYPOINT ["java", "-jar", "/app.jar"]
 ```
